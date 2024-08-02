@@ -2,7 +2,7 @@ import { builder } from "../builder";
 import { prisma } from "../db";
 
 builder.prismaObject("User", {
-  fields: (t) => ({
+  fields: (t: any) => ({
     id: t.exposeID("id"),
     name: t.exposeString("name"),
     messages: t.relation("messages"),
