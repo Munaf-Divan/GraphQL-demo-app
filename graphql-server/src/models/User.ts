@@ -17,3 +17,27 @@ builder.queryField("users", (t) =>
     },
   })
 );
+
+builder.mutationField("createUser", (t) =>
+  t.prismaField({
+    type: "User",
+    args: {
+      name: t.arg.string({ required: true }),
+    },
+    resolve: (query, root, args, ctx, info) => {
+      return prisma.user.create({ ...query, data: { ...args } });
+    },
+  })
+);
+
+builder.mutationField("deleteUser", (t) =>
+  t.prismaField({
+    type: "User",
+    args: {
+      id: t.arg.id({ required: true }),
+    },
+    resolve: (query, root, args, ctx, info) => {
+      return prisma.user.delete({ ...query, where: { id: Number(args.id) } });
+    },
+  })
+);

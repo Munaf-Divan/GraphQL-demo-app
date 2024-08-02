@@ -1,5 +1,23 @@
 query GetUsers {
     users {
+        id
+        name
+        messages {
+            body
+        }
+    }
+}
+
+mutation CreateUser($name: String!) {
+    createUser(name: $name) {
+        id
+        name
+    }
+}
+
+mutation DeleteUser($id: ID!) {
+    deleteUser(id: $id) {
+        id
         name
         messages {
             body
